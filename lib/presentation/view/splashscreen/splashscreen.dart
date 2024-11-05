@@ -1,7 +1,9 @@
 import 'package:another_flutter_splash_screen/another_flutter_splash_screen.dart';
+import 'package:codeedex_test/core/appclass.dart';
 import 'package:codeedex_test/core/appcolors.dart';
 import 'package:codeedex_test/core/apptextstyles.dart';
 import 'package:codeedex_test/presentation/view/authentication/view/loginpage.dart';
+import 'package:codeedex_test/presentation/view/home/view/homepage.dart';
 import 'package:flutter/material.dart';
 
 class Splashscreen extends StatelessWidget {
@@ -18,10 +20,21 @@ class Splashscreen extends StatelessWidget {
             style: AppTextStyles.head1,
           ),
         ),
-        onAnimationEnd: () {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (_) => LoginPage()),
+        onAnimationEnd: () async {
+          await AppClass().getToken().then(
+            (token) {
+              if (token == null) {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (_) => LoginPage()),
+                );
+              } else {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (_) => HomePage()),
+                );
+              }
+            },
           );
         },
       ),

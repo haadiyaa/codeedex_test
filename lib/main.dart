@@ -1,3 +1,4 @@
+import 'package:codeedex_test/presentation/providers/authprovider.dart';
 import 'package:codeedex_test/presentation/providers/functionsprovider.dart';
 import 'package:codeedex_test/presentation/view/splashscreen/splashscreen.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => FunctionsProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => AuthProvider(),
         ),
       ],
       child: MaterialApp(

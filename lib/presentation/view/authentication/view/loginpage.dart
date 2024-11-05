@@ -1,6 +1,7 @@
 import 'package:codeedex_test/core/appclass.dart';
 import 'package:codeedex_test/core/appcolors.dart';
 import 'package:codeedex_test/core/constants.dart';
+import 'package:codeedex_test/presentation/providers/authprovider.dart';
 import 'package:codeedex_test/presentation/providers/functionsprovider.dart';
 import 'package:codeedex_test/presentation/view/authentication/widgets/customtextfield.dart';
 import 'package:codeedex_test/presentation/view/home/view/homepage.dart';
@@ -74,9 +75,24 @@ class LoginPage extends StatelessWidget {
                   ),
                   onPressed: () {
                     if (_key.currentState!.validate()) {
-                      AppClass().successSnackbar(context, "Login Success");
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (_) => HomePage()));
+                      final provider =
+                          Provider.of<AuthProvider>(context, listen: false);
+                      provider
+                          .login(
+                        email: email.text.trim(),
+                        password: password.text.trim(),
+                      )
+                          .then(
+                        (value) {
+                          if (provider.msg == "Login Success") {
+                            AppClass().successSnackbar(context, provider.msg);
+                            Navigator.pushReplacement(context,
+                                MaterialPageRoute(builder: (_) => HomePage()));
+                          } else {
+                            AppClass().errorSnackbar(context, provider.msg);
+                          }
+                        },
+                      );
                     }
                   },
                   child: const Text('LOGIN'),
