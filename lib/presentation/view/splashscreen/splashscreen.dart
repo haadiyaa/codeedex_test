@@ -3,7 +3,7 @@ import 'package:codeedex_test/core/appclass.dart';
 import 'package:codeedex_test/core/appcolors.dart';
 import 'package:codeedex_test/core/apptextstyles.dart';
 import 'package:codeedex_test/presentation/view/authentication/view/loginpage.dart';
-import 'package:codeedex_test/presentation/view/home/view/homepage.dart';
+import 'package:codeedex_test/presentation/view/navbarpage/view/navbarpage.dart';
 import 'package:flutter/material.dart';
 
 class Splashscreen extends StatelessWidget {
@@ -31,7 +31,7 @@ class Splashscreen extends StatelessWidget {
               } else {
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (_) => HomePage()),
+                  MaterialPageRoute(builder: (_) => NavBarPage()),
                 );
               }
             },

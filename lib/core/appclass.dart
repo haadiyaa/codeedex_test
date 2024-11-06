@@ -6,12 +6,28 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AppClass {
   //==========================sharedpref==================================
   Future<void> setPreferences(String token) async {
-    var sharedPref =await  SharedPreferences.getInstance();
+    var sharedPref = await SharedPreferences.getInstance();
     await sharedPref.setString('token', token);
   }
+
+  Future<void> dltPreferences() async {
+    var sharedPref = await SharedPreferences.getInstance();
+    await sharedPref.clear();
+  }
+
   Future<String?> getToken() async {
-    var sharedPref =await  SharedPreferences.getInstance();
+    var sharedPref = await SharedPreferences.getInstance();
     return sharedPref.getString('token');
+  }
+
+  //===================mediaquery===============================
+
+  double getHeight(BuildContext context) {
+    return MediaQuery.of(context).size.height;
+  }
+
+  double getWidth(BuildContext context) {
+    return MediaQuery.of(context).size.width;
   }
 
   //========================snackbars=======================================

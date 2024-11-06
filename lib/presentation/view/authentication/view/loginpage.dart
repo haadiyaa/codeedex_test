@@ -4,7 +4,7 @@ import 'package:codeedex_test/core/constants.dart';
 import 'package:codeedex_test/presentation/providers/authprovider.dart';
 import 'package:codeedex_test/presentation/providers/functionsprovider.dart';
 import 'package:codeedex_test/presentation/view/authentication/widgets/customtextfield.dart';
-import 'package:codeedex_test/presentation/view/home/view/homepage.dart';
+import 'package:codeedex_test/presentation/view/navbarpage/view/navbarpage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
@@ -87,7 +87,7 @@ class LoginPage extends StatelessWidget {
                           if (provider.msg == "Login Success") {
                             AppClass().successSnackbar(context, provider.msg);
                             Navigator.pushReplacement(context,
-                                MaterialPageRoute(builder: (_) => HomePage()));
+                                MaterialPageRoute(builder: (_) => NavBarPage()));
                           } else {
                             AppClass().errorSnackbar(context, provider.msg);
                           }

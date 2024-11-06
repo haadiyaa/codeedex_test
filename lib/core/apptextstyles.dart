@@ -9,4 +9,19 @@ class AppTextStyles {
   static const TextStyle whiteText = TextStyle(
     color: AppColors.white,
   );
+  static const TextStyle blackText = TextStyle(
+    color: AppColors.black,
+  );
+  static const TextStyle dialogHead = TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: 20,
+  );
+  static const TextStyle dialogDesc = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 16,
+  );
+  static const TextStyle tile1 = TextStyle(
+    fontSize: 18,
+    color: AppColors.black,
+  );
 }

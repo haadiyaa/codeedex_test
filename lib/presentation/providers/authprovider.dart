@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 class AuthProvider extends ChangeNotifier {
   LoginModel? loginModel;
   String msg = '';
+  String useremail = '';
   Future<void> login({required String email, required String password}) async {
     try {
       await ApiRepository().login(email: email, password: password).then(
@@ -16,6 +17,7 @@ class AuthProvider extends ChangeNotifier {
           print('login $data');
           if (response.statusCode == 201) {
             loginModel = LoginModel.fromJson(data);
+            useremail = email;
             await AppClass().setPreferences(loginModel!.accessToken);
             msg = 'Login Success';
           } else {

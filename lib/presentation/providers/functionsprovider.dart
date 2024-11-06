@@ -7,12 +7,29 @@ import 'package:flutter/material.dart';
 
 class FunctionsProvider extends ChangeNotifier {
   bool isPasswordvisible = false;
-  ProductsModel? productsModel;
-  CategoriesModel? categoriesModel;
+  ListProductsModel? productsModel;
+  ListCategoriesModel? categoriesModel;
+
+  String selectedFilter = '';
+  String category = '';
+  List<String> filterOptions = [];
 
   void togglePassword() {
     isPasswordvisible = !isPasswordvisible;
     notifyListeners();
+  }
+
+  void changeFilter(int index) {
+    selectedFilter = filterOptions[index];
+    notifyListeners();
+  }
+
+  void getCategory(int index) {
+    category=categoriesModel!.data.where(
+      (element) {
+        return element.id == productsModel!.data[index].vCategory;
+      },
+    ).toString();
   }
 
   void getProducts() async {
@@ -22,11 +39,18 @@ class FunctionsProvider extends ChangeNotifier {
           final data = jsonDecode(response.body);
           print('products $data');
           if (response.statusCode == 200) {
-            productsModel = ProductsModel.fromJson(data);
-          } else {}
+            productsModel = ListProductsModel.fromJson(data);
+            print('prod success');
+          } else {
+            print('prod error');
+          }
         },
       );
-    } catch (e) {}
+    } catch (e) {
+      print('prod ${e.toString()}');
+    } finally {
+      notifyListeners();
+    }
   }
 
   void getCategories() async {
@@ -36,10 +60,22 @@ class FunctionsProvider extends ChangeNotifier {
           final data = jsonDecode(response.body);
           print('cat $data');
           if (response.statusCode == 200) {
-            categoriesModel = CategoriesModel.fromJson(data);
-          } else {}
+            categoriesModel = ListCategoriesModel.fromJson(data);
+            selectedFilter = categoriesModel!.data[0].catName;
+            for (var element in categoriesModel!.data) {
+              filterOptions.add(element.catName);
+            }
+            print(filterOptions);
+            // categoriesModel.forEach()
+          } else {
+            print('cat error');
+          }
         },
       );
-    } catch (e) {}
+    } catch (e) {
+      print('cat ${e.toString()}');
+    } finally {
+      notifyListeners();
+    }
   }
 }

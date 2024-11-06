@@ -1,8 +1,21 @@
 import 'dart:convert';
 
-List<ProductsModel> productsModelFromJson(String str) => List<ProductsModel>.from(json.decode(str).map((x) => ProductsModel.fromJson(x)));
+List<ProductsModel> productsModelFromJson(String str) =>  List<ProductsModel>.from(json.decode(str).map((x) => ProductsModel.fromJson(x)));
 
 String productsModelToJson(List<ProductsModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
+class ListProductsModel {
+  List<ProductsModel> data;
+
+    ListProductsModel({
+        required this.data,
+    });
+
+    factory ListProductsModel.fromJson(List<dynamic> json) => ListProductsModel(
+        data: json.map((map) => ProductsModel.fromJson(map)).toList(),
+    );
+
+}
 
 class ProductsModel {
     int id;
@@ -13,7 +26,7 @@ class ProductsModel {
     String price;
     String? partsName;
     String description;
-    dynamic offerPrice;
+     String? offerPrice;
     bool isOffer;
     String productRating;
 
@@ -24,9 +37,9 @@ class ProductsModel {
         required this.vBrand,
         required this.vCategory,
         required this.price,
-        required this.partsName,
+        this.partsName,
         required this.description,
-        required this.offerPrice,
+        this.offerPrice,
         required this.isOffer,
         required this.productRating,
     });
@@ -38,9 +51,9 @@ class ProductsModel {
         vBrand: json["v_brand"],
         vCategory: json["v_category"],
         price: json["price"],
-        partsName: json["parts_name"],
+        partsName: json["parts_name"]??'',
         description: json["description"],
-        offerPrice: json["offer_price"],
+        offerPrice: json["offer_price"]??'',
         isOffer: json["is_offer"],
         productRating: json["product_rating"],
     );

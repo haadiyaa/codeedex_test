@@ -4,6 +4,19 @@ List<CategoriesModel> categoriesModelFromJson(String str) => List<CategoriesMode
 
 String categoriesModelToJson(List<CategoriesModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
+class ListCategoriesModel {
+  List<CategoriesModel> data;
+
+    ListCategoriesModel({
+        required this.data,
+    });
+
+    factory ListCategoriesModel.fromJson(List<dynamic> json) => ListCategoriesModel(
+        data: json.map((map) => CategoriesModel.fromJson(map)).toList(),
+    );
+
+}
+
 class CategoriesModel {
     int id;
     String catName;
