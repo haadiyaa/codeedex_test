@@ -87,13 +87,17 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               onPressed: () {
                 AppClass().dltPreferences().then(
-                      (value) => Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => LoginPage(),
-                        ),
+                  (value) {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => LoginPage(),
                       ),
                     );
+                    AppClass().successSnackbar(
+                        context, 'Logged Out from ${provider.useremail}');
+                  },
+                );
               },
               child: const Text("LOGOUT"),
             ),
